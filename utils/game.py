@@ -14,7 +14,6 @@ class Hangman:
     def __init__(self):
 
         self.word_to_find = list(random.choice(self.POSSIBLE_WORDS).upper())
-        print(self.word_to_find)
         self.correctly_guessed_letters = "_ " * len(self.word_to_find)
         self.wrongly_guessed_letters = ""
 
