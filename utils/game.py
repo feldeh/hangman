@@ -42,7 +42,7 @@ class Hangman:
                 self.correctly_guessed_letters = "".join(correctly_guessed_letters_list)
 
             else:
-                # appends the letter to wrongly_guessed_letters if not contained in the word and not already in added in wrongly_guessed_letters
+                # appends the letter to wrongly_guessed_letters if not already in it
                 if input_guess not in self.wrongly_guessed_letters:
                     self.wrongly_guessed_letters += input_guess + " "
                 self.lives -= 1
@@ -69,7 +69,7 @@ class Hangman:
         while True:
             if self.lives == 0:
                 self.game_over()
-            # checks if correctly_guessed_letters contains an underscore, if it doesn't all the letters have been discovered
+            # checks if correctly_guessed_letters contains an underscore, if not the word has been discovered
             if self.correctly_guessed_letters.find("_") == -1:
                 self.well_played()
             else:
