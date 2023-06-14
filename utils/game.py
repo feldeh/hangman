@@ -17,8 +17,9 @@ class Hangman:
         self.wrongly_guessed_letters = ""
 
     def play(self):
-        while True:
 
+        while True:
+            print(f"Hidden word: {self.correctly_guessed_letters}")
             input_guess = input("Enter a letter: ").upper()
 
             # checks if input is a single letter
@@ -26,14 +27,14 @@ class Hangman:
                 input_guess = input(
                     "Invalid input, only enter a single letter: ").upper()
 
-            # checks if the word contains the letter
+            # checks if the word contains the letter input
             if input_guess in self.word_to_find:
                 print("Well done! You found a letter!")
                 # indexe(s) of the letter found inside the word
                 indexes = [i for i, x in enumerate(self.word_to_find) if x == input_guess]
                 # split correctly_guessed_letters into a list
                 correctly_guessed_letters_list = list(self.correctly_guessed_letters)
-                # replacing the underscore(s) inside the correctly_guessed_letters with the letter
+                # replace the underscore(s) inside the correctly_guessed_letters with the letter
                 for i in indexes:
                     # the index has to be *2 as each underscore is separated by a space
                     correctly_guessed_letters_list[i*2] = input_guess
@@ -41,8 +42,9 @@ class Hangman:
                 self.correctly_guessed_letters = "".join(correctly_guessed_letters_list)
 
             else:
-                # append the letter to wrongly_guessed_letters if not contained in the word
+                # appends the letter to wrongly_guessed_letters if not contained in the word
                 self.wrongly_guessed_letters += input_guess + " "
+
                 self.lives -= 1
                 self.error_count += 1
                 if self.lives > 0:
@@ -51,7 +53,7 @@ class Hangman:
             self.turn_count += 1
 
             print(
-                f"Correctly guessed letters: {self.correctly_guessed_letters}\nWrongly guessed letter: {self.wrongly_guessed_letters}\nLife remaining: {self.lives}\nError count: {self.error_count}\nTurn count: {self.turn_count}")
+                f"Wrongly guessed letter: {self.wrongly_guessed_letters}\nLife remaining: {self.lives}\nError count: {self.error_count}\nTurn count: {self.turn_count}")
 
             break
 
@@ -67,7 +69,7 @@ class Hangman:
         while True:
             if self.lives == 0:
                 self.game_over()
-            # checks if correctly_guessed_letters contains an underscore
+            # checks if correctly_guessed_letters contains an underscore, if it doesn't all the letters have been discovered
             if self.correctly_guessed_letters.find("_") == -1:
                 self.well_played()
             else:
