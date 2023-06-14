@@ -1,6 +1,5 @@
 
 import random
-import sys
 
 
 class Hangman:
@@ -48,21 +47,21 @@ class Hangman:
             print(
                 f"Correctly guessed letters: {self.correctly_guessed_letters}\nWrongly guessed letter: {self.wrongly_guessed_letters}\nLife remaining: {self.lives}\nError count: {self.error_count}\nTurn count: {self.turn_count}")
 
-            if self.lives == 0:
-                self.game_over()
-
-            if self.correctly_guessed_letters.find("_") == -1:
-                self.well_played()
+            break
 
     def game_over(self):
         print("Game over...")
-        sys.exit()
+        exit()
 
     def well_played(self):
         print(f"You found the word: {''.join(self.word_to_find)} in {self.turn_count} turns with {self.error_count} errors!")
-        sys.exit()
+        exit()
 
-
-game = Hangman()
-
-game.play()
+    def start_game(self):
+        while True:
+            if self.lives == 0:
+                self.game_over()
+            if self.correctly_guessed_letters.find("_") == -1:
+                self.well_played()
+            else:
+                self.play()
